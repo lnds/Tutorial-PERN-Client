@@ -7,8 +7,23 @@ import serverApiUrl from "./consts"
 const ListTodos = () => {
   const [todos, setTodos] = useState([])
   
+   // delete todo function
+  const deleteTodo = async (id) => {
+        try {
+            const deleteTodo = await fetch(`${serverApiUrl}/${id}`, {
+                method: "DELETE"
+            })
+
+            //console.log(deleteTodo)
+            setTodos(todos.filter(todo => todo.id !== id))
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
   const getTodos = async () => {
-     try {
+    console.log(serverApiUrl)
+        try {
             const response = await fetch(serverApiUrl,
                                         )
             const jsonData = await response.json()
@@ -30,6 +45,7 @@ const ListTodos = () => {
                     <tr>
                         <th scope="col">Descripción</th>
                         <th scope="col">Editar</th>
+                        <th scope="col">Borrar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +53,14 @@ const ListTodos = () => {
                         <tr key={todo.id}>
                             <td>{todo.description}</td>
                             <td><EditTodo todo={todo} /></td>
+                            <td>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={() => deleteTodo(todo.id)}
+                                >
+                                    Borrar
+                                </button>
+                            </td> 
                         </tr>
                     )}
                 </tbody>

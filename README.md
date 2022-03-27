@@ -386,3 +386,63 @@ Modifica también el archivo `components/ListTodos.js`:
 Ahora puedes probar modificando tus registros
 
 
+## Borrar una tarea
+
+Agrega esta función en `components/ListTodos.js` en la función `ListTodos()`
+
+```javascript
+ // delete todo function
+  const deleteTodo = async (id) => {
+        try {
+            const deleteTodo = await fetch(`${serverApiUrl}/${id}`, {
+                method: "DELETE"
+            })
+
+            //console.log(deleteTodo)
+            setTodos(todos.filter(todo => todo.id !== id))
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+```
+
+Luego modifica la tabla del siguiente modo:
+
+```javascript
+<table className="table  mt-5 text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Borrar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {todos.map(todo =>
+                        <tr key={todo.id}>
+                            <td>{todo.description}</td>
+                            <td><EditTodo todo={todo} /></td>
+                            <td>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={() => deleteTodo(todo.id)}
+                                >
+                                    Borrar
+                                </button>
+                            </td> 
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+```
+
+
+Y con esto aparecerá un botón rojo que te permitirá borrar registros.
+
+Con esto has completado el tutorial
+
+## Ejercicios
+
+- ¿Hay otras formas de refrescar la lista?
+- ¿Puedes ordenar las tareas colocando la más reciente al principio? ¿Donde se modifica esto?
+- Intenta agregar una marca para indicar si una tarea ha sido terminada
