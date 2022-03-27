@@ -21,7 +21,7 @@ const ListTodos = () => {
     useEffect(() => {
         getTodos()
     }, [])
-   console.log(todos)
+   //console.log(todos)
     return (
         <Fragment>
             <table className="table  mt-5 text-center">
@@ -31,6 +31,11 @@ const ListTodos = () => {
                     </tr>
                 </thead>
                 <tbody>
+                  {todos.map(todo =>
+                        <tr key={todo.todo_id}>
+                            <td>{todo.description}</td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </Fragment>

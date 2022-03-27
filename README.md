@@ -177,5 +177,32 @@ Deja todo lo que viene después de return tal como estaba.
 
 Ahora navega a la aplicación usando Chrome y activa developers tools, y revisa la consola de Chrome. Si todo está bien verás los registros.
 
+Atención, el valor de `serverApiUrl` puede variar.
 
+## Desplegar los registros en pantalla
 
+Modifica las últimas lineas de la función `ListTodos()` de este modo:
+
+```javascript
+//console.log(todos)
+    return (
+        <Fragment>
+            <table className="table  mt-5 text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {todos.map(todo =>
+                        <tr key={todo.todo_id}>
+                            <td>{todo.description}</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+        </Fragment>
+    )
+```
+
+Al hacer esto se desplegarán los registros en pantalla.
