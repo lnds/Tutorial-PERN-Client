@@ -206,3 +206,71 @@ Modifica las últimas lineas de la función `ListTodos()` de este modo:
 ```
 
 Al hacer esto se desplegarán los registros en pantalla.
+
+## Agregar Tareas
+
+Ahora crea el archivo `components/InputTodo.js` con el siguiente contenido:
+
+```javascript
+import React, { Fragment, useState } from "react"
+
+const serverApiUrl = 'https://server-tutorial-pern.lnds.repl.co/todos'
+
+const InputTodo = () => {
+
+    const [description, setDescription] = useState("")
+
+    const onSubmitForm = async e => {
+        e.preventDefault()
+        try {
+            const body = { description }
+            const response = await fetch(serverApiUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            })
+            window.location = "/"
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+    return (
+        <Fragment>
+            <h1 className="text-center mt-5">Lista de Tareas</h1>
+            <form className="d-flex mt-5" onSubmit={onSubmitForm}>
+                <input
+                    type="text"
+                    className="form-control"
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
+                />
+                <button className="btn btn-success">Agregar</button>
+            </form>
+        </Fragment>
+    )
+}
+
+export default InputTodo
+```
+
+Y modifica App.js agregando esta componente del siguiente modo:
+
+```javascript
+//components
+import InputTodo from "./components/InputTodo";
+import ListTodos from "./components/ListTodos";
+
+const App = () => {
+  return (
+    <Fragment>
+       <div className="container">
+          <InputTodo />
+          <ListTodos />
+        </div>
+    </Fragment>
+  );
+}
+```
+
+Una vez hecho esto puedes probar agregar una nueva tarea a tu lista.
