@@ -90,5 +90,52 @@ Depués antes de la etiqueta `</body>` agrega esto:
 
 Con esto tenemos acceso a bootstrap 5 en nuestra app.
 
+## Agregando nuestro primer componente
 
+Crea una carpeta `components` debajo de src. Agrega el archivo `ListTodos.js`
+
+Dentro de `src/components/ListTodos.js` escribe este código:
+
+```javascript
+import React, { Fragment} from "react"
+
+
+const ListTodos = () => {
+    return (
+        <Fragment>
+            <table className="table  mt-5 text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </Fragment>
+    )
+}
+
+export default ListTodos
+```
+
+De este modo hemos configurado una tabla que contendrá nuestros registros.
+
+
+Luego modifica App.js de este modo:
+
+```javascript 
+//components
+import ListTodos from "./components/ListTodos";
+
+const App = () => {
+  return (
+    <Fragment>
+       <div className="container">
+          <ListTodos />
+        </div>
+    </Fragment>
+  );
+}
+```
 

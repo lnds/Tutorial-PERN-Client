@@ -1,10 +1,15 @@
 import React, { Fragment } from "react"
 import './App.css';
 
-function App() {
+//components
+import ListTodos from "./components/ListTodos";
+
+const App = () => {
   return (
     <Fragment>
-      <h1>App</h1>
+       <div className="container">
+          <ListTodos />
+        </div>
     </Fragment>
   );
 }
