@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react"
 
-const serverApiUrl = 'https://server-tutorial-pern.lnds.repl.co/todos'
+import serverApiUrl from "./consts"
 
 const InputTodo = () => {
 
