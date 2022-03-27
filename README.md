@@ -139,3 +139,43 @@ const App = () => {
 }
 ```
 
+## Conectandose a la API
+
+Ahora usaremos `useState` y `useEffect` para recuperar la data desde el servidor backend.
+
+Modifica el archivo `componentes/ListTodos.js` de este modo:
+
+```javascript
+import React, { Fragment, useEffect, useState } from "react"
+
+const serverApiUrl = 'https://server-tutorial-pern.lnds.repl.co/todos'
+
+const ListTodos = () => {
+  const [todos, setTodos] = useState([])
+  
+  const getTodos = async () => {
+    console.log(serverApiUrl)
+        try {
+            const response = await fetch(serverApiUrl,
+                                        )
+            const jsonData = await response.json()
+
+            setTodos(jsonData)
+            console.log(jsonData)
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+    useEffect(() => {
+        getTodos()
+    }, [])
+   console.log(todos)
+   return (
+```    
+
+Deja todo lo que viene después de return tal como estaba.
+
+Ahora navega a la aplicación usando Chrome y activa developers tools, y revisa la consola de Chrome. Si todo está bien verás los registros.
+
+
+
